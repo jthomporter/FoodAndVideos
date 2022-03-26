@@ -1,0 +1,15 @@
+#title {
+    background-color: darkgray;
+}
+#SearchResults {
+    background: gray;
+    height: 300px;
+}
+
+.column {
+    height: 400px;
+}
+
+#row4 {
+    text-align: center;
+}

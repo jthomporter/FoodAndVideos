@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="HomeStyle.css" />
+    <link rel="stylesheet" href="Header.css" />
+  </head>
+  <body>
+    <div id="logo" class="LogoRow" onclick="location.href='home.html'">
+      <img
+        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsweetdrawingblog%2FSweet-Drawing-Blog%2Fwp-content%2Fuploads%2F2015%2F01%2F24225827%2FRounded-Rectangle1.png&f=1&nofb=1"
+        alt="pic"
+      />
+    </div>
+    <div id="regbuttons" class="RegRow">
+      <div id="login" class="reg" onclick="location.href='LogIn.html'">
+        <a>LOG IN</a>
+      </div>
+      <div id="signup" class="reg" onclick="location.href='SignUP.html'">
+        <a>SIGN UP</a>
+      </div>
+    </div>
+    <div class="row3">
+      <div class="column">
+        <div id="FriendTitle" class="title">Foods With The Most Videos!</div>
+        <div id="FriendBody" class="body"></div>
+      </div>
+
+      <div id="SearchColumn" class="column">
+        <div id="SearchTitle" class="title">What's for dinner tonight?</div>
+        <div id="SearchBody" class="body">
+          <label id="FoodTitle" for="fname">Enter your food here!</label><br />
+          <form method="post">
+            <input type="text" id="fname" name="name" />
+            <!-- <button
+              type="button"
+              onclick="location.href='SearchResults.html'"
+              method="POST"
+            > -->
+
+            <button type="button" method="POST">Search</button>
+          </form>
+          <div id="contribute">
+            Have a food and video pair that you think will go well together?
+          </div>
+          <form action="Contribute.php">
+            <button type="button" onclick="location.href='Contribute.html'">
+              Contribute
+            </button>
+          </form>
+        </div>
+
+        <!--        <div id="SearchTitle" class="title">-->
+        <!--            Have a video that goes well with a food?-->
+        <!--        </div>-->
+      </div>
+
+      <div class="column">
+        <div id="PopularTitle" class="title">Popular Food and Videos</div>
+        <div id="PopularBody" class="body"></div>
+      </div>
+    </div>
+
+    <link rel="stylesheet" href="Footer.css" />
+
+    <div id="row4">
+      <div class="footer" onclick="location.href='AboutUs.html'">
+        <a>About Us</a>
+      </div>
+      <div class="footer"><a>Social Media</a></div>
+      <div class="footer"><a>Contact Owner</a></div>
+      <div class="footer"><a>Terms of Service</a></div>
+    </div>
+  </body>
+</html>

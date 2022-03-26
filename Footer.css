@@ -1,0 +1,22 @@
+#row4 {
+    width: 550px;
+    margin: auto;
+}
+.footer {
+
+    float: left;
+    border: 1px black solid;
+
+
+    background-color: yellow;
+    text-align: center;
+    line-height: 100%;
+    line-width: 80%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.footer:hover {
+    background-color: red;
+}

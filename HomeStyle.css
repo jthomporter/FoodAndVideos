@@ -1,0 +1,75 @@
+/*!**/
+/*Edit the size of the image.*/
+/* *!*/
+
+/*#log_in_sign_up {*/
+/*    text-align: center;*/
+
+/*}*/
+
+/*#logo {*/
+/*    margin: auto;*/
+/*}*/
+
+/*#login {*/
+
+/*}*/
+
+/*#row1 {*/
+/*    float: left;*/
+
+/*}*/
+/*!**/
+/*registration buttons*/
+/* *!*/
+/*#regbuttons {*/
+/*    margin: auto;*/
+/*}*/
+
+
+body {
+    bakground-color: #777777;
+    font-family: "Lucida Console"
+}
+
+#SearchColumn {
+    width: 39.33%;
+}
+.column {
+    margin-top: 5px;
+    float: left;
+    width: 29.33%;
+    text-align: center;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.title {
+    width: 95%;
+    line-height: 100%;
+    background-color: darkgray;
+    margin-bottom: 2px;
+    margin-top: 1px;
+    text-align: center;
+    margin: auto;
+    font-size: 30px;
+}
+.body {
+    width: 95%;
+    height: 375px;
+    background-color: lightgray;
+    margin: auto;
+
+}
+.fname {
+    margin: auto;
+}
+
+#FoodTitle {
+
+}

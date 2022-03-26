@@ -1,0 +1,58 @@
+
+.reg:hover {
+    background-color: red;
+
+}
+
+/*
+Format the image on row .
+ */
+
+img {
+    border: 1px black solid;
+    max-width: 30%;
+    max-height: 100%;
+}
+
+#logo {
+    text-align: center;
+}
+
+#regbuttons {
+    width: 204px;
+    height: 18px;
+    margin: auto;
+}
+
+/*
+dimensions and aspects of the log in and register buttons.
+ */
+.reg {
+
+    border: 1px black solid;
+    width: 100px;
+    background-color: yellow;
+    text-align: center;
+    line-height: 100%;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    /*
+    move this div to the center of the div or tag it's in
+     */
+    margin: auto;
+}
+.reg:hover {
+    background-color: red;
+}
+.column {
+    height: 250px;
+}
+#col2 {
+
+    background: gray;
+}
+
+#col2LogIn {
+    height: 125px;
+    background-color: gray;
+}
