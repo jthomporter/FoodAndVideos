@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="Footer.css" />
   </head>
   <body>
+    <?php
+      session_start();
+      print_r($_SESSION);
+    ?>
     <div id="logo" class="LogoRow" onclick="location.href='home.html'">
       <img
         src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsweetdrawingblog%2FSweet-Drawing-Blog%2Fwp-content%2Fuploads%2F2015%2F01%2F24225827%2FRounded-Rectangle1.png&f=1&nofb=1"
@@ -37,10 +41,13 @@
     <div id="col1" class="column"></div>
 
     <div id="col2" class="column">
+      <form action="ContributeHandler.php" method="POST">
       <label id="food" for="foodname">Food:</label><br />
       <input type="text" id="foodname" name="foodname" /><br />
       <label id="video" for="videoname">Video:</label><br />
       <input type="text" id="videoname" name="videoname" name="" /><br />
+      <label id="video" for="videourl">URL:</label><br />
+      <input type="text" id="videourl" name="videourl" /><br />
       <label id="RadioText" for="TOSRadio"
         >This food/video pairing is adherent to our terms of service.</label
       >
@@ -50,9 +57,8 @@
         name="fav_language"
         value="HTML"
       /><br />
-      <button type="button" onclick="location.href='home.html'">
-        Submit for Review
-      </button>
+      <input type="submit" name="submit"><br/>
+      </form>
     </div>
     <div id="col3" class="column>"></div>
 

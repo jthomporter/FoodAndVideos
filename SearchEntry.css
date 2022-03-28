@@ -1,0 +1,11 @@
+.res {
+    margin: 10px;
+    padding: 1px;
+    background-color: yellow;
+    border-color: black;
+    border-width: 100px;
+}
+
+.res:hover {
+    background-color: red;
+}

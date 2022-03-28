@@ -5,6 +5,12 @@
     <title>Title</title>
   </head>
   <body>
+    <?php
+      print_r($_POST);
+      if ($_POST['name'] == null) {
+        header("Location: index.php");
+      }
+    ?>
     <link rel="stylesheet" href="Header.css" />
     <div id="logo" class="LogoRow" onclick="location.href='index.php'">
       <img
@@ -36,7 +42,24 @@
 
     <div id="col2" class="column">
       <div id="title">Search Results</div>
-      <div id="SearchResults"></div>
+      <div id="SearchResults">
+      <link rel="stylesheet" href="SearchEntry.css" />
+      <?php
+      include_once("Dao.php");
+      $dao = new Dao();
+        $r = $dao->querySearchResults($_POST['name']);
+        $results = $r->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($results as $key=>$value) {
+
+            echo '<a href="'.$value['URL'].'" target="_blank">';
+            echo '<div class="res">';
+            echo $value['title'] . "\n";
+            echo '</div>';
+            echo '</a>';
+          }
+      ?>
+
+      </div>
     </div>
     <div id="col3" class="column"></div>
 

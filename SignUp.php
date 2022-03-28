@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +12,7 @@
   </head>
   <body>
       <?php
-       echo print_r($_POST);
+       echo print_r($_SESSION);
       ?>
     <div id="logo" class="LogoRow" onclick="location.href='index.php'">
       <img
