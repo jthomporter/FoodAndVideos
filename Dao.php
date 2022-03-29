@@ -1,56 +1,58 @@
 
 <?php
-class Dao {
+class Dao
+{
 
     private $password = 'AllanTuringHasTheBigGay69!';
     private $user = 'root';
     private $dsn = "mysql:host=localhost;dbname=website";
-   // protected $logger;
+    // protected $logger;
 
     // public function __construct () {
-       
+
     // }
 
-    public function connectDB() {
-       
- 
+    public function connectDB()
+    {
+
+
         try {
-           // dl("php_pdo_mysql.dll");
+            // dl("php_pdo_mysql.dll");
             $connection = new PDO($this->dsn, $this->user, $this->password);
-       
-         //   echo "connected to db \n";
+
+            //   echo "connected to db \n";
             return $connection;
         } catch (PDOException $e) {
             $error = 'Connection failed: ' . $e->getMessage();
 
             echo  $error;
         }
-    
     }
 
-    public function InsertIntoUsers($username, $password, $email) {
+    public function InsertIntoUsers($username, $password, $email)
+    {
         $con = $this->connectDB();
-        
-        $sql = 'INSERT INTO users (username, password, email)  VALUES ("' . $username . '", "' . $password . '", "' . $email . '")' ;
+
+        $sql = 'INSERT INTO users (username, password, email)  VALUES ("' . $username . '", "' . $password . '", "' . $email . '")';
         echo $sql;
-            try {
-                $stmt = $con->prepare('INSERT INTO users (username, password, email)  VALUES ("' . $username . '", "' . $password . '", "' . $email . '")');
-                $stmt->execute();
-                $_SESSION['SignedIn'] = true;
-                return;
-            } catch (PDOException $e) {
+        try {
+            $stmt = $con->prepare('INSERT INTO users (username, password, email)  VALUES ("' . $username . '", "' . $password . '", "' . $email . '")');
+            $stmt->execute();
+            $_SESSION['SignedIn'] = true;
+            return;
+        } catch (PDOException $e) {
 
-                echo "error with registering user.";
-            }
-
+            echo "error with registering user.";
+        }
     }
 
-    public function InsertIntoFoodVideoPair($food, $video, $url) {
+    public function InsertIntoFoodVideoPair($food, $video, $url)
+    {
         session_start();
         $food = strtolower($food);
         $con = $this->connectDB();
-        
-       
+
+
         $sqlFood = 'INSERT INTO food (name) VALUES ("' . $food . '")';
         $sqlVideo = 'INSERT INTO videos (title, URL) VALUES ("' . $video . '", "' . $url . '")';
         $sqlPair = 'INSERT food_video_user (name, URL) VALUES ("' . $food . '", "' . $url . '")';
@@ -63,32 +65,32 @@ class Dao {
             echo $sqlPair . "\n";
 
             try {
-            $stmt = $con->prepare('INSERT INTO food (name) VALUES ("' . $food . '")');
-            $stmt->execute();
+                $stmt = $con->prepare('INSERT INTO food (name) VALUES ("' . $food . '")');
+                $stmt->execute();
             } catch (PDOException $e) {
                 $error = 'Connection failed: ' . $e->getMessage();
                 echo
-                  $error;
+                $error;
             }
 
 
 
             try {
-            $stmt = $con->prepare('INSERT INTO videos (title, URL) VALUES ("' . $video . '", "' . $url . '")');
-            $stmt->execute();
+                $stmt = $con->prepare('INSERT INTO videos (title, URL) VALUES ("' . $video . '", "' . $url . '")');
+                $stmt->execute();
             } catch (PDOException $e) {
                 $error = 'Connection failed: ' . $e->getMessage();
                 echo  $error;
             }
 
             try {
-              $stmt = $con->prepare( 'INSERT food_video_user (name, URL) VALUES ("' . $food . '", "' . $url . '")');
-              $stmt->execute();
+                $stmt = $con->prepare('INSERT food_video_user (name, URL) VALUES ("' . $food . '", "' . $url . '")');
+                $stmt->execute();
             } catch (PDOException $e) {
                 $error = 'Connection failed: ' . $e->getMessage();
                 echo  $error;
             }
-            
+
             // echo $sqlFood . '\n';
             // $stmt->execute();
             // $stmt = $con->prepare($sqlVideo);
@@ -98,69 +100,73 @@ class Dao {
             // echo $sqlPair . '\n';
             // $stmt->execute();
             return;
-         } catch (PDOException $e) {
+        } catch (PDOException $e) {
             $error = 'Connection failed: ' . $e->getMessage();
             echo  $error;
         }
-         
-     
-    
-
-
     }
 
 
-    public function logIn($username, $password) {
+    public function logIn($username, $password)
+    {
         session_start();
         $con = $this->connectDB();
 
         $sql = 'SELECT * FROM users WHERE username = "' . $username . '" AND password = "' . $password . '"';
         $con->prepare($sql);
-       try {
-        $r = $con->query($sql);
-        if ($r->rowCount() == 1) {
-            $_SESSION['SignedIn'] = true;
-            return true;
+        try {
+            $r = $con->query($sql);
+            if ($r->rowCount() == 1) {
+                $_SESSION['SignedIn'] = true;
+                return true;
+            }
+        } catch (PDOException $e) {
         }
-       } catch (PDOException $e) {
-
-       }
-
     }
 
 
-    
 
-public function querySearchResults($foodName) {
-    session_start();
-    $con = $this->connectDB();
-    $sql = 'SELECT videos.title, food_video_user.URL FROM food_video_user LEFT JOIN videos ON videos.URL = food_video_user.URL WHERE name = "' . $foodName . '"';
-    $con->prepare($sql);
 
-    try {
-        $results = $con->query($sql);
-        return $results;
-    } catch (PDOException $e) {
+    public function querySearchResults($foodName)
+    {
+        session_start();
+        $con = $this->connectDB();
+        $sql = 'SELECT videos.title, food_video_user.URL FROM food_video_user LEFT JOIN videos ON videos.URL = food_video_user.URL WHERE name = "' . $foodName . '"';
+        $con->prepare($sql);
 
+        try {
+            $results = $con->query($sql);
+            return $results;
+        } catch (PDOException $e) {
+        }
+    }
+
+    public function queryFoodsWMostVideos()
+    {
+        //session_start();
+        $con = $this->connectDB();
+        $sql = 'SELECT name, count(URL) AS amount FROM food_video_user GROUP BY name;';
+        $con->prepare($sql);
+
+        try {
+            $results = $con->query($sql);
+            return $results;
+        } catch (PDOException $e) {
+        }
+    }
+
+
+    public function queryVideosWMostFoods()
+    {
+        //session_start();
+        $con = $this->connectDB();
+        $sql = 'SELECT URL, count(name) AS amount FROM food_video_user GROUP BY URL;';
+        $con->prepare($sql);
+
+        try {
+            $results = $con->query($sql);
+            return $results;
+        } catch (PDOException $e) {
+        }
     }
 }
-
-public function queryFoodsWMostVideos() {
-    //session_start();
-    $con = $this->connectDB();
-    $sql = 'SELECT name, count(URL) AS amount FROM food_video_user GROUP BY name;';
-    $con->prepare($sql);
-
-    try {
-        $results = $con->query($sql);
-        return $results;
-    } catch (PDOException $e) {
-
-    }
-}
-
-
-}
-
-
-

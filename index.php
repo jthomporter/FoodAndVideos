@@ -1,6 +1,6 @@
-
 <?php
-  session_start();
+session_start();
+
 ?>
 <html>
 
@@ -11,42 +11,55 @@
 
 <body>
   <?php
-    $_SESSION['test'] = 'test';
-    echo $_SESSION['test'];
-    echo print_r($_SESSION);
-    if (array_key_exists('SignedIn', $_SESSION) && !$_SESSION['SignedIn']) {
-      $_SESSION = array();
-    }
+  $_SESSION['test'] = 'test';
+  echo $_SESSION['test'];
+  echo print_r($_SESSION);
+  if (array_key_exists('SignedIn', $_SESSION) && !$_SESSION['SignedIn']) {
+    $_SESSION = array();
+  }
   ?>
   <div id="logo" class="LogoRow" onclick="location.href='index.php'">
     <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsweetdrawingblog%2FSweet-Drawing-Blog%2Fwp-content%2Fuploads%2F2015%2F01%2F24225827%2FRounded-Rectangle1.png&f=1&nofb=1" alt="pic" />
   </div>
-  
+
   <?php
   if (array_key_exists('SignedIn', $_SESSION) && !$_SESSION["SignedIn"]) {
-  echo '<div id="regbuttons" class="RegRow">';
-   echo '<div id="login" class="reg" onclick="location.href=' . "'LogIn.php'" . '">';
-   echo   '<a>LOG IN</a>';
+    echo '<div id="regbuttons" class="RegRow">';
+    echo '<div id="login" class="reg" onclick="location.href=' . "'LogIn.php'" . '">';
+    echo   '<a>LOG IN</a>';
     echo '</div>';
-   echo '<div id="signup" class="reg" onclick="location.href=' ."'SignUp.php'" . '">';
-     echo '<a>SIGN UP</a>';
-   echo  '</div>';
-  echo '</div>';
+    echo '<div id="signup" class="reg" onclick="location.href=' . "'SignUp.php'" . '">';
+    echo '<a>SIGN UP</a>';
+    echo  '</div>';
+    echo '</div>';
   } else {
     echo '<div id="regbuttons" class="RegRow">';
     echo  '<div id="login" class="reg" onclick="location.href=' . "'SignOutHandler.php'" . '">';
     echo   '<a>SIGN OUT</a>';
-     echo '</div>';
-     echo '<div class="reg" onclick="location.href=' ."'SignUp.php'" . '">';
-     echo '<a>SIGN UP</a>';
-   echo  '</div>';
-     echo '</div>';
+    echo '</div>';
+    // echo '<div class="reg" onclick="location.href=' . "'SignUp.php'" . '">';
+    // echo '<a>' . $_SESSION['username'] . '</a>';
+    // echo  '</div>';
+    echo '</div>';
   }
   ?>
   <div class="row3">
     <div class="column">
       <div id="FriendTitle" class="title">Foods With The Most Videos!</div>
-      <div id="FriendBody" class="body"></div>
+      <div id="FriendBody" class="body">
+        <link rel="stylesheet" href="SearchEntry.css" />
+        <?php
+        include("Dao.php");
+        $dao = new Dao();
+        $r = $dao->queryVideosWMostFoods();
+        $results = $r->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($results as $key => $value) {
+          echo '<div class="res">';
+          echo $value['URL'] . " " . $value['amount'];
+          echo '</div>';
+        }
+        ?>
+      </div>
     </div>
 
     <div id="SearchColumn" class="column">
@@ -75,21 +88,20 @@
     <div class="column">
       <div id="PopularTitle" class="title">Popular Food and Videos</div>
       <div id="PopularBody" class="body">
-      <link rel="stylesheet" href="SearchEntry.css" />
-      <?php
-      include("Dao.php");
-      $dao = new Dao();
+        <link rel="stylesheet" href="SearchEntry.css" />
+        <?php
+        include("Dao.php");
+        $dao = new Dao();
         $r = $dao->queryFoodsWMostVideos();
         $results = $r->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($results as $key=>$value) {
+        foreach ($results as $key => $value) {
 
-        
-            echo '<div class="res">';
-            echo $value['name'] . " " . $value['amount'];
-            echo '</div>';
-       
-          }
-      ?>
+
+          echo '<div class="res">';
+          echo $value['name'] . " " . $value['amount'];
+          echo '</div>';
+        }
+        ?>
       </div>
     </div>
   </div>
