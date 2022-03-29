@@ -3,9 +3,9 @@
 class Dao
 {
 
-    private $password = 'password!';
+    private $password = 'password';
     private $user = 'root';
-    private $dsn = "mysql:host=us-cdbr-east-05.cleardb.net;dbname=website";
+    private $dsn = "mysql:host=localhost;dbname=website";
     // protected $logger;
 
     // public function __construct () {
@@ -19,7 +19,7 @@ class Dao
         try {
             // dl("php_pdo_mysql.dll");
             $connection = new PDO($this->dsn, $this->user, $this->password);
-
+                
             //   echo "connected to db \n";
             return $connection;
         } catch (PDOException $e) {
