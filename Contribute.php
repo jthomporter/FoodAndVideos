@@ -11,7 +11,7 @@
   <body>
     <?php
       session_start();
-      print_r($_SESSION);
+    //  print_r($_SESSION);
     ?>
     <div id="logo" class="LogoRow" onclick="location.href='home.html'">
       <img

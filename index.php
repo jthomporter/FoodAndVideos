@@ -12,7 +12,6 @@ session_start();
   <?php
   $_SESSION['test'] = 'test';
   echo $_SESSION['test'];
-  echo print_r($_SESSION);
   if (array_key_exists('SignedIn', $_SESSION) && !$_SESSION['SignedIn']) {
     $_SESSION = array();
   }
