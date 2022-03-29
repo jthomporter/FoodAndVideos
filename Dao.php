@@ -3,9 +3,9 @@
 class Dao
 {
 
-    private $password = 'AllanTuringHasTheBigGay69!';
+    private $password = 'password!';
     private $user = 'root';
-    private $dsn = "mysql:host=localhost;dbname=website";
+    private $dsn = "mysql:host=us-cdbr-east-05.cleardb.net;dbname=website";
     // protected $logger;
 
     // public function __construct () {
