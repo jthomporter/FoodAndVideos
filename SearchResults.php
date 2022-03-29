@@ -6,10 +6,7 @@
   </head>
   <body>
     <?php
-      print_r($_POST);
-      if ($_POST['name'] == null) {
-        header("Location: index.php");
-      }
+   session_start();
     ?>
     <link rel="stylesheet" href="Header.css" />
     <div id="logo" class="LogoRow" onclick="location.href='index.php'">
@@ -18,22 +15,27 @@
         alt="pic"
       />
     </div>
-    <div id="regbuttons" class="RegRow">
-      <div id="login" class="reg" onclick="location.href='LogIn.php'">
-        <a>LOG IN</a>
-      </div>
-      <div id="signup" class="reg" onclick="location.href='SignUp.php'">
-        <a>SIGN UP</a>
-      </div>
-      <div id="searchbar">
-        <input
-          type="text"
-          id="Search"
-          name="Search"
-          value="Enter a food here!"
-        /><br />
-      </div>
-    </div>
+    <?php
+  if (!array_key_exists('SignedIn', $_SESSION) || !$_SESSION["SignedIn"]) {
+    echo '<div id="regbuttons" class="RegRow">';
+    echo '<div id="login" class="reg" onclick="location.href=' . "'LogIn.php'" . '">';
+    echo   '<a>LOG IN</a>';
+    echo '</div>';
+    echo '<div id="signup" class="reg" onclick="location.href=' . "'SignUp.php'" . '">';
+    echo '<a>SIGN UP</a>';
+    echo  '</div>';
+    echo '</div>';
+  } else {
+    echo '<div id="regbuttons" class="RegRow">';
+    echo  '<div id="login" class="reg" onclick="location.href=' . "'SignOutHandler.php'" . '">';
+    echo   '<a>SIGN OUT</a>';
+    echo '</div>';
+    echo '<div id="signup" class="reg" ">';
+    echo '<a>'.$_SESSION['username'].'</a>';
+    echo  '</div>';
+    echo '</div>';
+  }
+  ?>
 
     <link rel="stylesheet" href="ThreeColumn.css" />
     <link rel="stylesheet" href="SearchResults.css" />
@@ -48,7 +50,7 @@
       include_once("Dao.php");
       $dao = new Dao();
         $r = $dao->querySearchResults($_POST['name']);
-        $results = $r->fetchAll(PDO::FETCH_ASSOC);
+        $results = $r;//->fetchAll(PDO::FETCH_ASSOC);
         foreach ($results as $key=>$value) {
 
             echo '<a href="'.$value['URL'].'" target="_blank">';

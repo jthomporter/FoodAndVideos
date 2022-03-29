@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 <html>
 
@@ -23,7 +22,7 @@ session_start();
   </div>
 
   <?php
-  if (array_key_exists('SignedIn', $_SESSION) && !$_SESSION["SignedIn"]) {
+  if (!array_key_exists('SignedIn', $_SESSION) || !$_SESSION["SignedIn"]) {
     echo '<div id="regbuttons" class="RegRow">';
     echo '<div id="login" class="reg" onclick="location.href=' . "'LogIn.php'" . '">';
     echo   '<a>LOG IN</a>';
@@ -37,9 +36,9 @@ session_start();
     echo  '<div id="login" class="reg" onclick="location.href=' . "'SignOutHandler.php'" . '">';
     echo   '<a>SIGN OUT</a>';
     echo '</div>';
-    // echo '<div class="reg" onclick="location.href=' . "'SignUp.php'" . '">';
-    // echo '<a>' . $_SESSION['username'] . '</a>';
-    // echo  '</div>';
+    echo '<div id="signup" class="reg" ">';
+    echo '<a>'.$_SESSION['username'].'</a>';
+    echo  '</div>';
     echo '</div>';
   }
   ?>
@@ -49,14 +48,19 @@ session_start();
       <div id="FriendBody" class="body">
         <link rel="stylesheet" href="SearchEntry.css" />
         <?php
-        include("Dao.php");
+        include_once("Dao.php");
         $dao = new Dao();
-        $r = $dao->queryVideosWMostFoods();
+        $_SESSION['dao'] = $dao;
+        $r = $dao->queryFoodsWMostVideos();
         $results = $r->fetchAll(PDO::FETCH_ASSOC);
         foreach ($results as $key => $value) {
-          echo '<div class="res">';
-          echo $value['URL'] . " " . $value['amount'];
+          echo '<form method="POST" action="SearchResults.php">';
+          echo '<input type="hidden" name="name" value="'.$value['name'].'"/>';
+          echo '<div class="res" onclick="this.parentNode.submit();">';
+          echo $value['name'] . " " . $value['amount'];
           echo '</div>';
+          echo '</form>';
+          
         }
         ?>
       </div>
@@ -86,20 +90,21 @@ session_start();
     </div>
 
     <div class="column">
-      <div id="PopularTitle" class="title">Popular Food and Videos</div>
+      <div id="PopularTitle" class="title">Videos With the Most Foods</div>
       <div id="PopularBody" class="body">
         <link rel="stylesheet" href="SearchEntry.css" />
         <?php
-        include("Dao.php");
-        $dao = new Dao();
-        $r = $dao->queryFoodsWMostVideos();
+        include_once("Dao.php");
+        $dao = $_SESSION['dao'];
+        $r = $dao->queryVideosWMostFoods();
         $results = $r->fetchAll(PDO::FETCH_ASSOC);
         foreach ($results as $key => $value) {
-
-
+          
+          echo '<a href="'.$value['URL'].'" target="_blank">';
           echo '<div class="res">';
-          echo $value['name'] . " " . $value['amount'];
+          echo $value['title'] . " " . $value['amount'];
           echo '</div>';
+          echo '</a>';
         }
         ?>
       </div>

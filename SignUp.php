@@ -11,9 +11,7 @@
     <title>Title</title>
   </head>
   <body>
-      <?php
-       echo print_r($_SESSION);
-      ?>
+      
     <div id="logo" class="LogoRow" onclick="location.href='index.php'">
       <img
         src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsweetdrawingblog%2FSweet-Drawing-Blog%2Fwp-content%2Fuploads%2F2015%2F01%2F24225827%2FRounded-Rectangle1.png&f=1&nofb=1"
@@ -40,6 +38,28 @@
         <input type="text" id="ename" name="ename" name="" /><br />
         <input type="submit" value="Submit" />
       </form>
+      <?php
+        if (array_key_exists('SignUpError', $_SESSION)) {
+          $m = $_SESSION['SignUpError'];
+          echo '<div id="errors">';
+          if ($m['username']) {
+            echo "<div>";
+            echo "Username needed.";
+            echo "</div>";
+          }
+          if ($m['password']) {
+            echo "<div>";
+            echo "Password needed.";
+            echo "</div>";
+          }
+          if ($m['email']) {
+            echo "<div>";
+            echo "Email needed.";
+            echo "</div>";
+          }
+          echo "</div>";
+        }
+      ?>
     </div>
     <div id="col3" class="column"></div>
 

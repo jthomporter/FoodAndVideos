@@ -48,7 +48,7 @@ class Dao
 
     public function InsertIntoFoodVideoPair($food, $video, $url)
     {
-        session_start();
+       //session_start();
         $food = strtolower($food);
         $con = $this->connectDB();
 
@@ -109,18 +109,26 @@ class Dao
 
     public function logIn($username, $password)
     {
-        session_start();
+       // session_start();
         $con = $this->connectDB();
 
         $sql = 'SELECT * FROM users WHERE username = "' . $username . '" AND password = "' . $password . '"';
-        $con->prepare($sql);
+        $stmt = $con->prepare($sql);
         try {
-            $r = $con->query($sql);
-            if ($r->rowCount() == 1) {
+          //  $r = $con->query($stmt);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo "size";
+            sizeof($results);
+            if (sizeof($results)== 1) {
+                
                 $_SESSION['SignedIn'] = true;
                 return true;
+            } else {
+                echo "error";
             }
         } catch (PDOException $e) {
+            echo "sql exceptions";
         }
     }
 
@@ -129,13 +137,15 @@ class Dao
 
     public function querySearchResults($foodName)
     {
-        session_start();
+        //session_start();
         $con = $this->connectDB();
         $sql = 'SELECT videos.title, food_video_user.URL FROM food_video_user LEFT JOIN videos ON videos.URL = food_video_user.URL WHERE name = "' . $foodName . '"';
-        $con->prepare($sql);
+        $stmt = $con->prepare($sql);
 
         try {
-            $results = $con->query($sql);
+          //  $results = $con->query($sql);
+          $stmt->execute();
+         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $results;
         } catch (PDOException $e) {
         }
@@ -160,13 +170,14 @@ class Dao
     {
         //session_start();
         $con = $this->connectDB();
-        $sql = 'SELECT URL, count(name) AS amount FROM food_video_user GROUP BY URL;';
+        $sql = 'SELECT videos.title, count(name) AS amount, food_video_user.URL FROM food_video_user LEFT JOIN videos ON videos.URL = food_video_user.URL GROUP BY title ORDER BY amount desc';
         $con->prepare($sql);
 
         try {
             $results = $con->query($sql);
             return $results;
         } catch (PDOException $e) {
+            echo $sql;
         }
     }
 }

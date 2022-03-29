@@ -19,14 +19,14 @@
       <div id="signup" class="reg" onclick="location.href='SignUp.html'">
         <a>SIGN UP</a>
       </div>
-      <div id="searchbar">
+      <!-- <div id="searchbar">
         <input
           type="text"
           id="Search"
           name="Search"
           value="Enter a food here!"
         /><br />
-      </div>
+      </div> -->
     </div>
     <link rel="stylesheet" href="AboutUs.css" />
     <link rel="stylesheet" href="ThreeColumn.css" />

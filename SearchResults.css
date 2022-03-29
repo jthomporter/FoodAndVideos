@@ -8,8 +8,15 @@
 
 .column {
     height: 400px;
+    
+   
 }
 
 #row4 {
     text-align: center;
+}
+
+#SearchResults {
+    overflow:scroll;
+    overflow-x:hidden;
 }

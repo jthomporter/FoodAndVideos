@@ -40,6 +40,8 @@ body {
     float: left;
     width: 29.33%;
     text-align: center;
+    overflow:scroll;
+
 
 }
 
