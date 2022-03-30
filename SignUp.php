@@ -29,13 +29,31 @@
     <div id="col2" class="column">
       <form action="SignUpHandler.php" method="post">
         <label id="username" for="uname">Username:</label><br />
-        <input type="text" id="uname" name="fname" /><br />
+        <input type="text" id="uname" name="fname" 
+        <?php
+          if (key_exists('olddata', $_SESSION) && $_SESSION['olddata']['username']!=null) {
+            echo 'value = ' . $_SESSION['olddata']['username'];
+          }
+        ?>
+        /><br />
         <label id="password" for="pname">Password:</label><br />
-        <input type="text" id="pname" name="pname" name="" /><br />
+        <input type="text" id="pname" name="pname" name="" 
+        <?php
+          if (key_exists('olddata', $_SESSION) && $_SESSION['olddata']['password']!=null) {
+            echo 'value = ' . $_SESSION['olddata']['password'];
+          }
+        ?>
+        /><br />
         <label id="cpassword" for="cname">Confirm Password:</label><br />
         <input type="text" id="cname" name="cname" name="" /><br />
         <label id="email" for="ename">Email:</label><br />
-        <input type="text" id="ename" name="ename" name="" /><br />
+        <input type="text" id="ename" name="ename" name="" 
+        <?php
+          if (key_exists('olddata', $_SESSION) && $_SESSION['olddata']['email']!=null) {
+            echo 'value = ' . $_SESSION['olddata']['email'];
+          }
+        ?>
+        /><br />
         <input type="submit" value="Submit" />
       </form>
       <?php
@@ -57,6 +75,21 @@
             echo "Email needed.";
             echo "</div>";
           }
+          echo "</div>";
+        }
+        if (array_key_exists('nummissingelements', $_SESSION) && $_SESSION['nummissingelements']!=0) {
+          echo "<div>";
+          echo "All fields must match.";
+          echo "</div>";
+        }
+        if (array_key_exists('matchingpasswords', $_SESSION) && !$_SESSION['matchingpasswords']) {
+          echo "<div>";
+          echo "Passwords don't match.";
+          echo "</div>";
+        }
+        if (array_key_exists('uniqueEmailAndUsername', $_SESSION) && !$_SESSION['uniqueEmailAndUsername']) {
+          echo "<div>";
+          echo "Passwords don't match.";
           echo "</div>";
         }
       ?>

@@ -5,6 +5,18 @@ $username = $_POST['fname'];
 $password = $_POST['pname'];
 $password_confirmation = $_POST['cname'];
 $email = $_POST['ename'];
+$_SESSION['nummissingelements'] = 0;
+$_SESSION['matchingpasswords'] = true;
+$_SESSION['uniqueEmailAndUsername'] = true;
+if ($password != $password_confirmation) {
+    $_SESSION['matchingpasswords'] = true;
+    $errorBool = true;
+}
+
+$OldData = array();
+$OldData['username'] = $username;
+$OldData['password'] = $password;
+$OldData['email'] = $email;
 
 $dao = new Dao();
 $dao->connectDB();
@@ -18,21 +30,28 @@ $_SESSION['InvalidEmail'] = false;
 $errorBool = false;
 
 if ($username == null) {
+    $_SESSION['nummissingelements']+=1;
    // echo $username;
     $missingInfo['username'] = true;
+    $OldData['username'] = null;
     $errorBool = true;
 } 
 if ($password == null) {
+    $_SESSION['nummissingelements']+=1;
     $missingInfo['password'] = true;
+    $OldData['password'] = null;
     $errorBool = true;
 } 
 if ($email == null) {
+    $_SESSION['nummissingelements']+=1;
      $missingInfo['email'] = true;
+     $OldData['email'] = true;
      $errorBool = true;
 }
 
-if (preg_match("/^\\S+@\\S+\\.\\S+$/", $email) == 1) {
+if (!filter_var($email, FILTER_VALIDATE_EMAIL) == 1) {
     $_SESSION['InvalidEmail'] = true;
+    $errorBool = true;
 }
 
  //echo sizeof($missingInfo);
@@ -41,6 +60,7 @@ if (preg_match("/^\\S+@\\S+\\.\\S+$/", $email) == 1) {
 if ($errorBool) {
     $_SESSION['SignUpError'] = $missingInfo;
     //echo "error";
+    $_SESSION['olddata'] = $OldData;
    header('refresh:1;url=SignUp.php');
    exit;
 } else {
@@ -52,9 +72,11 @@ if ($errorBool) {
 
 if ($_SESSION['SignedIn'] == null) {
    // echo "something went wrong";
+   $_SESSION['olddata'] = $OldData;
   header('refresh:1;url=SignUp.php');
 exit;
 } else {
+    $_SESSION['uniqueEmailAndUsername'] = false;
     //echo "it worked again";
     $_SESSION['username'] = $username;
     header('Location: index.php');

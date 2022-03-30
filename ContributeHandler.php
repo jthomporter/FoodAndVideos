@@ -20,6 +20,10 @@ echo print_r($missingContents);
 
 echo "inserting into the table";
 $db->InsertIntoFoodVideoPair($foodname, $videoname, $videourl);
+if (sizeof($missingContents)==0) {
+    header('Location: index.php');
+    exit;
+}
 
 
 

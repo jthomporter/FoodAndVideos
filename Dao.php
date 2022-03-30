@@ -3,9 +3,12 @@
 class Dao
 {
 
-    private $password = 'password';
-    private $user = 'root';
-    private $dsn = "mysql:host=localhost;dbname=website";
+    private $password = 'c121649e';
+    private $user = 'b69564d33100b5';
+   // private $dsn = "mysql:host=us-cdbr-east-05.cleardb.net;dbname=website";
+    private $host = 'us-cdbr-east-05.cleardb.net';
+    private $dbname = 'heroku_e5d2fb99a100aed';
+
     // protected $logger;
 
     // public function __construct () {
@@ -18,13 +21,14 @@ class Dao
 
         try {
             // dl("php_pdo_mysql.dll");
-            $connection = new PDO($this->dsn, $this->user, $this->password);
+            $connection = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->user,
+            $this->password);
                 
             //   echo "connected to db \n";
             return $connection;
         } catch (PDOException $e) {
             $error = 'Connection failed: ' . $e->getMessage();
-
+            echo "something went wrong\n";
             echo  $error;
         }
     }
@@ -156,7 +160,7 @@ class Dao
         //session_start();
         $con = $this->connectDB();
         $sql = 'SELECT name, count(URL) AS amount FROM food_video_user GROUP BY name;';
-        $con->prepare($sql);
+        //$con->prepare($sql);
 
         try {
             $results = $con->query($sql);
