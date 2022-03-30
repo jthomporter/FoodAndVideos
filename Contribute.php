@@ -43,7 +43,10 @@
     <div id="col2" class="column">
       <form action="ContributeHandler.php" method="POST">
       <label id="food" for="foodname">Food:</label><br />
-      <input type="text" id="foodname" name="foodname" /><br />
+      <input type="text" id="foodname" name="foodname" 
+      <?php
+      ?>
+      /><br />
       <label id="video" for="videoname">Video:</label><br />
       <input type="text" id="videoname" name="videoname" name="" /><br />
       <label id="video" for="videourl">URL:</label><br />

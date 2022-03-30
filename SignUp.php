@@ -56,6 +56,7 @@
         /><br />
         <input type="submit" value="Submit" />
       </form>
+      <div id="SignUpError">
       <?php
         if (array_key_exists('SignUpError', $_SESSION)) {
           $m = $_SESSION['SignUpError'];
@@ -79,7 +80,7 @@
         }
         if (array_key_exists('nummissingelements', $_SESSION) && $_SESSION['nummissingelements']!=0) {
           echo "<div>";
-          echo "All fields must match.";
+          echo "All fields must be filled.";
           echo "</div>";
         }
         if (array_key_exists('matchingpasswords', $_SESSION) && !$_SESSION['matchingpasswords']) {
@@ -91,8 +92,14 @@
           echo "<div>";
           echo "Passwords don't match.";
           echo "</div>";
+        } 
+        if (array_key_exists('InvalidEmail', $_SESSION) && !$_SESSION['InvalidEmail']) {
+          echo "<div>";
+          echo "Please specify a valid email address.";
+          echo "</div>";
         }
       ?>
+      </div>
     </div>
     <div id="col3" class="column"></div>
 

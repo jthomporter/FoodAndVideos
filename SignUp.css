@@ -56,3 +56,7 @@ dimensions and aspects of the log in and register buttons.
     height: 125px;
     background-color: gray;
 }
+
+#SignUpError {
+    background-color:red
+}

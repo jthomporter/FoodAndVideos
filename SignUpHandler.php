@@ -9,7 +9,7 @@ $_SESSION['nummissingelements'] = 0;
 $_SESSION['matchingpasswords'] = true;
 $_SESSION['uniqueEmailAndUsername'] = true;
 if ($password != $password_confirmation) {
-    $_SESSION['matchingpasswords'] = true;
+    $_SESSION['matchingpasswords'] = false;
     $errorBool = true;
 }
 
@@ -42,10 +42,16 @@ if ($password == null) {
     $OldData['password'] = null;
     $errorBool = true;
 } 
-if ($email == null) {
+if ($password_confirmation == null) {
+    $_SESSION['nummissingelements']+=1;
+    $missingInfo['passwordconfirmation'] = true;
+    $OldData['passwordconfirmation'] = null;
+    $errorBool = true;
+} 
+if($email == null) {
     $_SESSION['nummissingelements']+=1;
      $missingInfo['email'] = true;
-     $OldData['email'] = true;
+     $OldData['email'] = null;
      $errorBool = true;
 }
 
