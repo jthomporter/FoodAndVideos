@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <link rel="icon" type="image/x-icon" href="ChickenLeg.jpeg"/>
+  <title>Food and Videos</title>
     <meta charset="UTF-8" />
-    <title>Title</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"/>  
+  <link rel="stylesheet" href="Font.css" />
   </head>
   <body>
     <?php
@@ -10,10 +13,7 @@
     ?>
     <link rel="stylesheet" href="Header.css" />
     <div id="logo" class="LogoRow" onclick="location.href='index.php'">
-      <img
-        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsweetdrawingblog%2FSweet-Drawing-Blog%2Fwp-content%2Fuploads%2F2015%2F01%2F24225827%2FRounded-Rectangle1.png&f=1&nofb=1"
-        alt="pic"
-      />
+    <img src="logo.png" alt="pic"/>
     </div>
     <?php
   if (!array_key_exists('SignedIn', $_SESSION) || !$_SESSION["SignedIn"]) {
@@ -73,6 +73,9 @@
       <div class="footer"><a>Social Media</a></div>
       <div class="footer"><a>Contact Owner</a></div>
       <div class="footer"><a>Terms of Service</a></div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+   <script src="Results.js"></script>
     </div>
   </body>
 </html>

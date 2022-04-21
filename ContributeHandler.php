@@ -1,15 +1,17 @@
 <?php
-include("Dao.php");
-echo print_r($_POST);
-$db = new Dao();
+
+//echo print_r($_POST);
+
+session_start();
 
 $foodname = $_POST['foodname'];
 $videoname = $_POST['videoname'];
 $videourl = $_POST['videourl'];
+$oldContent = array();
 $_SESSION['oldContent'] = array();
-$_SESSION['oldContent']['foodname'] = $foodname;
-$_SESSION['oldContent']['videoname'] = $foodname;
-$_SESSION['oldContent']['videourl'] = $videourl;
+$oldContent['foodname'] = $foodname;
+$oldContent['oldContent']['videoname'] = $videoname;
+$oldContent['oldContent']['videourl'] = $videourl;
 
 
 $errorbool = false;
@@ -28,19 +30,21 @@ if ($videourl == null) {
 }
 //echo print_r($missingContents);
 if ($errorbool) {
+    $_SESSION['oldContent'] = $oldContent;
     $_SESSION['MissingVideoForm'] = $missingContents;
+    //print_r($missingContents);
     header('Location: Contribute.php');
-    exit;
+    die();
 }
 
 
-echo "inserting into the table";
-$db->InsertIntoFoodVideoPair($foodname, $videoname, $videourl);
-if (sizeof($missingContents)==0) {
+
+if (!$errorbool) {
+    //echo "inserrt";
+    include_once("Dao.php");
+    $db = new Dao();
+    //   echo "inserting into the table";
+    $db->InsertIntoFoodVideoPair($foodname, $videoname, $videourl);
     header('Location: index.php');
     exit;
 }
-
-
-
-  

@@ -36,7 +36,7 @@ dimensions and aspects of the log in and register buttons.
     line-height: 100%;
     margin-bottom: 0px;
     margin-top: 10px;
-    /*
+    /*submit
     move this div to the center of the div or tag it's in
      */
     margin: auto;
@@ -45,7 +45,8 @@ dimensions and aspects of the log in and register buttons.
     background-color: red;
 }
 .column {
-    height: 250px;
+    height: 400px;
+    overflow: hidden;
 }
 #col2 {
 
@@ -53,10 +54,10 @@ dimensions and aspects of the log in and register buttons.
 }
 
 #col2LogIn {
-    height: 125px;
+    height: 250px;
     background-color: gray;
 }
 
-#SignUpError {
+.SignUpError {
     background-color:red
 }

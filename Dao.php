@@ -40,7 +40,9 @@ class Dao
         $sql = 'INSERT INTO users (username, password, email)  VALUES ("' . $username . '", "' . $password . '", "' . $email . '")';
         echo $sql;
         try {
-            $stmt = $con->prepare('INSERT INTO users (username, password, email)  VALUES ("' . $username . '", "' . $password . '", "' . $email . '")');
+            $password = $password . "ShiaKazing";
+            $encryptedPassword = hash('sha256', $password);
+            $stmt = $con->prepare('INSERT INTO users (username, password, email)  VALUES ("' . $username . '", "' . $encryptedPassword . '", "' . $email . '")');
             $stmt->execute();
             $_SESSION['SignedIn'] = true;
             return;
@@ -115,8 +117,10 @@ class Dao
     {
        // session_start();
         $con = $this->connectDB();
+        $password = $password . "ShiaKazing";
+        $encryptedPassword =  $encryptedPassword = hash('sha256', $password);
 
-        $sql = 'SELECT * FROM users WHERE username = "' . $username . '" AND password = "' . $password . '"';
+        $sql = 'SELECT * FROM users WHERE username = "' . $username . '" AND password = "' . $encryptedPassword . '"';
         $stmt = $con->prepare($sql);
         try {
           //  $r = $con->query($stmt);
@@ -159,7 +163,7 @@ class Dao
     {
         //session_start();
         $con = $this->connectDB();
-        $sql = 'SELECT name, count(URL) AS amount FROM food_video_user GROUP BY name;';
+        $sql = 'SELECT name, count(URL) AS amount FROM food_video_user GROUP BY name ORDER BY amount DESC;';
         //$con->prepare($sql);
 
         try {
@@ -184,4 +188,5 @@ class Dao
             echo $sql;
         }
     }
+    
 }

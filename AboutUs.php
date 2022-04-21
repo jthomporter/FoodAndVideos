@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <link rel="icon" type="image/x-icon" href="ChickenLeg.jpeg"/>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css"/>  
+  <link rel="stylesheet" href="Font.css" />
+  <title>Food and Videos</title>
     <meta charset="UTF-8" />
     <title></title>
   </head>

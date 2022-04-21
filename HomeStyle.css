@@ -28,8 +28,12 @@
 
 
 body {
-    bakground-color: #777777;
-    font-family: "Lucida Console"
+    color : black;
+    font-family: "Lucida Console";
+}
+
+.background {
+    color : #000000;
 }
 
 #SearchColumn {
@@ -40,7 +44,7 @@ body {
     float: left;
     width: 29.33%;
     text-align: center;
-    overflow:scroll;
+    overflow-y:scroll;
 
 
 }
@@ -74,4 +78,9 @@ body {
 
 #FoodTitle {
 
+}
+
+
+#contribute {
+    opacity : 0;
 }

@@ -70,7 +70,8 @@ if ($errorBool) {
    header('refresh:1;url=SignUp.php');
    exit;
 } else {
-    //echo "method call";
+    //echo "method call";$dao
+    //$encryptedPassword =  $hash = password_hash($plaintext_password, PASSWORD_DEFAULT);
     $dao->InsertIntoUsers($username, $password, $email);
 }
 
@@ -87,4 +88,11 @@ exit;
     $_SESSION['username'] = $username;
     header('Location: index.php');
     exit;
+}
+
+function encrypt($string) {
+    $key = "mastermind";
+    $enc = encryptfunc($string, $key);
+
+    return $enc;
 }

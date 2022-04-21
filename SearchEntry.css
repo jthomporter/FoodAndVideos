@@ -3,7 +3,8 @@
     padding: 1px;
     background-color: yellow;
     border-color: black;
-    border-width: 100px;
+    border: 1px;
+   display : none;
 }
 
 .res:hover {
